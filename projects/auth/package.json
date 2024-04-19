@@ -1,13 +1,31 @@
 {
-  "name": "auth",
+  "name": "@g.plymenos/ng-firebase-auth",
   "version": "0.0.1",
+  "description": "An Angular Firebase UI Implementation with Custom Email Sign In/Sign Up",
+  "keywords": ["angular","firebase","firebase-ui", "library"],
+  "author": "George Plymenos <g.plymenos@gmail.com>",
+  "license": "MIT",
+  "main": "bundles/auth.umd.js",
+  "module": "fesm2022/auth.mjs",
+  "esm2022": "esm2022/auth.mjs",
+  "typings": "lib/auth/auth.module.d.ts",
+  "files": [
+    "esm2022/**/*",
+    "fesm2022/**/*",
+    "lib/**/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gplymenos/NgFirebaseAuthLib"
+  },
   "peerDependencies": {
     "@angular/common": "^17.3.0",
     "@angular/core": "^17.3.0",
     "@angular/fire": "^17.0.1",
     "firebase": "^10.11.0",
     "firebaseui": "^6.1.0",
-    "firebaseui-angular": "^6.2.1"
+    "firebaseui-angular": "^6.2.1",
+    "@angular/material": "^17.3.5"
   },
   "dependencies": {
     "tslib": "^2.3.0"
