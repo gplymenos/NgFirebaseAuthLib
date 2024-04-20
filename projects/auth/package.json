@@ -5,15 +5,7 @@
   "keywords": ["angular","firebase","firebase-ui", "library"],
   "author": "George Plymenos <g.plymenos@gmail.com>",
   "license": "MIT",
-  "main": "bundles/auth.umd.js",
-  "module": "fesm2022/auth.mjs",
-  "esm2022": "esm2022/auth.mjs",
-  "typings": "lib/auth/auth.module.d.ts",
-  "files": [
-    "esm2022/**/*",
-    "fesm2022/**/*",
-    "lib/**/*"
-  ],
+  "main": "index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/gplymenos/NgFirebaseAuthLib"
