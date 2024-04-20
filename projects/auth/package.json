@@ -1,6 +1,6 @@
 {
   "name": "@g.plymenos/ng-firebase-auth",
-  "version": "0.0.1",
+  "version": "0.0.6",
   "description": "An Angular Firebase UI Implementation with Custom Email Sign In/Sign Up",
   "keywords": ["angular","firebase","firebase-ui", "library"],
   "author": "George Plymenos <g.plymenos@gmail.com>",
