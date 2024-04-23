@@ -27,7 +27,17 @@
   >
     Sign In
   </button>
+
+  <div class="orDivider">OR</div>
+
+  <button
+    mat-flat-button
+    color="accent"
+    (click)="changeLoginState(loginFormStatus.SignUp)"
+  >
+    Sign Up
+  </button>
 </form>
-<a mat-button color="primary" (click)="forgotPasswordClicked()" class="link"
+<a (click)="forgotPasswordClicked()" class="firebaseui-link"
   >Forgot your Password?</a
 >

@@ -21,17 +21,11 @@
   @if(formState == loginFormStatus.SignUp) {
   <div class="signUpMessage">
     Already have an account?
-    <a mat-button class="link" (click)="formState = loginFormStatus.SignIn"
+    <a
+      class="firebaseui-link"
+      (click)="changeLoginState(loginFormStatus.SignIn)"
       >Sign In</a
     >
-  </div>
-  } @else {
-  <div class="signUpMessage">
-    Don't have an account?
-    <a mat-button class="link" (click)="formState = loginFormStatus.SignUp"
-      >Sign Up</a
-    >
-    with your email
   </div>
   }
 </mat-dialog-content>

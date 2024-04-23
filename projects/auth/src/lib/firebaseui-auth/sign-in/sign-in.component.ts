@@ -17,6 +17,7 @@ import { ErrorHandlingService } from '../../services/error-handling.service';
 })
 export class SignInComponent {
   @Output() loginFormStateChanged = new EventEmitter();
+  loginFormStatus = loginFormStateEnum;
   errorMessage = '';
 
   constructor(
@@ -39,5 +40,9 @@ export class SignInComponent {
 
   forgotPasswordClicked() {
     this.loginFormStateChanged.emit(loginFormStateEnum.ForgotPassword);
+  }
+
+  changeLoginState(state: loginFormStateEnum) {
+    this.authService.setFormState(state);
   }
 }

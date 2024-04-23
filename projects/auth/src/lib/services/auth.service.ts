@@ -8,6 +8,7 @@ import {
   from,
   throwError,
 } from 'rxjs';
+import { loginFormStateEnum } from '../enums/login.enums';
 import { ErrorHandlingService } from './error-handling.service';
 
 @Injectable({
@@ -15,6 +16,9 @@ import { ErrorHandlingService } from './error-handling.service';
 })
 export class AuthService {
   private loggedInUserSource = new BehaviorSubject<firebase.User | null>(null);
+  private loginFormStateSource = new BehaviorSubject<loginFormStateEnum>(
+    loginFormStateEnum.SignIn
+  );
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -90,6 +94,10 @@ export class AuthService {
     return this.loggedInUserSource.asObservable();
   }
 
+  getLoginFormState(): Observable<loginFormStateEnum> {
+    return this.loginFormStateSource.asObservable();
+  }
+
   resetPassword(email: string): Observable<void> {
     return from(this.afAuth.sendPasswordResetEmail(email)).pipe(
       catchError((error) => {
@@ -98,5 +106,9 @@ export class AuthService {
         return throwError(error);
       })
     );
+  }
+
+  setFormState(state: loginFormStateEnum) {
+    this.loginFormStateSource.next(state);
   }
 }
