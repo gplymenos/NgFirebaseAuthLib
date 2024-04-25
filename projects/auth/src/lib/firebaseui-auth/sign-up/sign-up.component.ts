@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { loginFormStateEnum } from '../../enums/login.enums';
 import { AuthService } from '../../services/auth.service';
 import { ErrorHandlingService } from '../../services/error-handling.service';
 
@@ -34,6 +35,7 @@ export class SignUpComponent {
   submit(username: string, password: string, displayName: string) {
     this.authService.signup(username, password).subscribe({
       next: () => {
+        this.authService.setFormState(loginFormStateEnum.SignIn);
         this.dialog.closeAll();
       },
       error: (error) => {

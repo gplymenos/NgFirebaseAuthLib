@@ -1,14 +1,22 @@
 <h1>Sign In</h1>
-<form>
+<form (ngSubmit)="submit(f)" #f="ngForm">
   <mat-form-field appearance="outline">
     <mat-label>Username</mat-label>
-    <input matInput placeholder="Email" type="email" name="email" #email />
+    <input
+      matInput
+      ngModel
+      placeholder="Email"
+      type="email"
+      name="email"
+      #email
+    />
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Password</mat-label>
     <input
       matInput
+      ngModel
       placeholder="Password"
       type="password"
       name="password"
@@ -20,13 +28,7 @@
     <mat-error>{{ errorMessage }}</mat-error>
   </ng-container>
 
-  <button
-    mat-flat-button
-    color="primary"
-    (click)="submit(email.value, password.value)"
-  >
-    Sign In
-  </button>
+  <button mat-flat-button color="primary" type="submit">Sign In</button>
 
   <div class="orDivider">OR</div>
 

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -11,7 +12,13 @@ import { ErrorHandlingService } from '../../services/error-handling.service';
 @Component({
   selector: 'app-sign-in',
   standalone: true,
-  imports: [CommonModule, MatFormFieldModule, MatInputModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+  ],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.scss',
 })
@@ -26,8 +33,9 @@ export class SignInComponent {
     private errorHandler: ErrorHandlingService
   ) {}
 
-  submit(username: string, password: string) {
-    this.authService.signInWithEmail(username, password).subscribe({
+  submit(form: NgForm) {
+    const value = form.value;
+    this.authService.signInWithEmail(value.email, value.password).subscribe({
       next: () => {
         this.dialog.closeAll();
       },
