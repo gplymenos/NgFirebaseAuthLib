@@ -6,7 +6,7 @@ import { loginFormStateEnum } from '../enums/login.enums';
 import { AuthService } from './auth.service';
 import { ErrorHandlingService } from './error-handling.service';
 
-fdescribe('AuthService', () => {
+describe('AuthService', () => {
   let service: AuthService;
   let afAuthMock: any;
   let errorHandlingService: ErrorHandlingService;

@@ -13,4 +13,14 @@ describe('ErrorHandlingService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should handle errors', () => {
+    expect(service.handleError({ code: 'auth/weak-password' })).toBe(
+      'The password is too weak.'
+    );
+  });
+
+  it('should handle errors without error code', () => {
+    expect(service.handleError({})).toBe('An unexpected error occurred.');
+  });
 });
