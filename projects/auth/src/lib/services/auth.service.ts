@@ -11,10 +11,27 @@ import {
 import { loginFormStateEnum } from '../enums/login.enums';
 import { ErrorHandlingService } from './error-handling.service';
 
+export interface IAuthService {
+  setFormState(state: loginFormStateEnum): void;
+  signInWithEmail(
+    email: string,
+    password: string
+  ): Observable<firebase.auth.UserCredential>;
+  signup(
+    email: string,
+    password: string
+  ): Observable<firebase.auth.UserCredential>;
+  signOut(): Observable<void>;
+  getLoggedUser(): firebase.User | null;
+  getLoggedUserUpdates(): Observable<firebase.User | null>;
+  getLoginFormState(): Observable<loginFormStateEnum>;
+  resetPassword(email: string): Observable<void>;
+}
+
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AuthService implements IAuthService {
   private loggedInUserSource = new BehaviorSubject<firebase.User | null>(null);
   private loginFormStateSource = new BehaviorSubject<loginFormStateEnum>(
     loginFormStateEnum.SignIn
@@ -25,6 +42,10 @@ export class AuthService {
     private errorHandler: ErrorHandlingService
   ) {
     this.subscribeAuthentication().subscribe(); // Initialize listening to auth state changes
+  }
+
+  setFormState(state: loginFormStateEnum) {
+    this.loginFormStateSource.next(state);
   }
 
   signInWithEmail(
@@ -64,18 +85,18 @@ export class AuthService {
     );
   }
 
-  subscribeAuthentication(): Observable<firebase.User | null> {
+  private subscribeAuthentication(): Observable<firebase.User | null> {
     return new Observable((subscriber) => {
-      const subscription = this.afAuth.authState.subscribe(
-        (user) => {
+      const subscription = this.afAuth.authState.subscribe({
+        next: (user: firebase.User | null) => {
           this.loggedInUserSource.next(user);
           subscriber.next(user);
         },
-        (error) => {
+        error: (error) => {
           this.errorHandler.handleError(error);
           subscriber.error(error);
-        }
-      );
+        },
+      });
 
       // Cleanup on unsubscribe
       return {
@@ -106,9 +127,5 @@ export class AuthService {
         return throwError(error);
       })
     );
-  }
-
-  setFormState(state: loginFormStateEnum) {
-    this.loginFormStateSource.next(state);
   }
 }
